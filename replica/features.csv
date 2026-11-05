@@ -1,0 +1,37 @@
+feature,area,priority,original,clone,notes
+Import CV PDF or Word,profile,must,yes,yes,PDF via Claude document block (scanned OK); DOCX via mammoth; TXT; paste
+AI extracts structured profile from CV,profile,must,yes,yes,structured outputs (zod); verified on real API: PDF 8 s and pasted text
+Edit profile manually,profile,must,inferred,yes,
+Session setup with company role job description,session,must,inferred,yes,
+Choose interview language,session,must,yes,yes,8 languages
+Capture microphone audio,session,must,yes,yes,
+Capture meeting tab or system audio,session,must,yes,yes,getDisplayMedia tab audio (Chrome/Edge); verified with simulated tab audio + real Deepgram
+Live transcription,session,must,yes,yes,Deepgram nova-3 verified end to end (needs Member+ key); continuous Web Audio feed + Finalize watchdog; browser Web Speech not tested (mic blocked in test browser)
+Separate interviewer vs me in transcript,session,should,inferred,yes,one Deepgram socket per source; verified
+Auto-detect question and suggest answer,session,must,yes,yes,verified: speech end → answer request in ~2.5 s; candidate speech does not trigger
+Streaming answer under 2s first token,session,must,yes,yes,measured: Sonnet 5.5 0.8 s; Opus 5.5 1.1–3.7 s first text; Haiku 5.5 2.3 s
+Answers grounded in CV and job context,session,must,yes,yes,profile + job cached system block
+Manual answer trigger and keyboard shortcut,session,must,inferred,yes,Space / typed question / per-utterance button
+Screen capture code analysis for technical tests,session,should,yes,yes,frame grab from shared tab or uploaded image
+Save transcript and answers,history,must,yes,yes,IndexedDB
+Session archive list,history,must,yes,yes,
+Session detail view,history,must,yes,yes,
+Export session,history,should,no,yes,Markdown
+Delete session and data,privacy,must,yes,yes,per session + wipe all + JSON export/import
+Generate ATS CV from job description,documents,must,yes,yes,
+Generate cover letter from job description,documents,should,yes,yes,
+Edit and export documents,documents,should,yes,yes,Markdown edit; .md; print to PDF
+Application tracker,applications,should,yes,yes,kanban with drag and drop
+Link session to application,applications,could,inferred,yes,moves card to Entretien
+Multilingual UI and answers,i18n,should,yes,partial,answers + transcription multilingual; UI French only
+Answer style settings (length tone),settings,should,inferred,yes,
+Free browser speech recognition fallback,settings,could,no,yes,
+Desktop always-on-top window,platform,could,yes,no,v1 web; Tauri later
+Practice mode with AI recruiter,session,could,no,no,
+Dark mode,ui,could,inferred,no,live screen is dark; rest light
+Stealth mode invisible to screen share,session,skip,yes,skip,only purpose is deceiving the interviewer; original ToS §4 bans fraudulent deception
+Credits subscriptions Stripe,billing,skip,yes,skip,open source self-hosted BYO API keys
+Email accounts and auth,onboarding,skip,yes,skip,single-user local-first; optional Basic auth password for deployments
+Customer logos testimonials marketing copy,marketing,skip,yes,skip,owned by the original
+Free 10 min trial,billing,skip,yes,skip,no billing
+Native desktop installers,platform,skip,yes,skip,v1 web only

@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Souffleur palette: ink (stage dark), paper (warm off-white), spotlight (amber). */
+  --color-ink-950: #0f0d16;
+  --color-ink-900: #17141f;
+  --color-ink-800: #221e2d;
+  --color-ink-700: #302a3f;
+  --color-ink-600: #463e59;
+  --color-paper: #faf8f4;
+  --color-spot-50: #fff7eb;
+  --color-spot-100: #fdebcc;
+  --color-spot-200: #fbd394;
+  --color-spot-300: #f6b75b;
+  --color-spot-400: #ef9b33;
+  --color-spot-500: #e07d17;
+  --color-spot-600: #b95e0f;
+  --color-spot-700: #8f4510;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-paper text-ink-900 antialiased;
+  }
+  ::selection {
+    @apply bg-spot-200 text-ink-900;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-spot-500;
+  }
+}
+
+/* Print only the document being exported. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(239 155 51 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgb(239 155 51 / 0);
+  }
+}
+.live-dot {
+  animation: pulse-ring 1.4s ease-out infinite;
+}

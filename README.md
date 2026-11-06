@@ -80,6 +80,8 @@ vercel deploy --prod
 
 `vercel.json` force le préréglage Next.js. Les envois de fichiers sont limités à 4 Mo (limite des fonctions Vercel).
 
+Une fois le projet relié au dépôt (`vercel git connect`), chaque push sur `main` redéploie la production et chaque autre branche obtient une URL de prévisualisation.
+
 ## Architecture
 
 ```
